@@ -21,12 +21,12 @@ class MedicamentoServiceTest {
         Medicamento medicamento = new Medicamento(
                 "Ibuprofeno", "Aché", 395, 23.0);
         medicamentoService.salvar(medicamento);
-        Assertions.assertTrue(medicamento.getId() >= 0);
+        Assertions.assertTrue(medicamento.getId() > 0);
 
         Medicamento medicamento2 = new Medicamento(
                 "Cetoconazol", "Medley", 550, 26.5);
         medicamentoService.salvar(medicamento2);
-        Assertions.assertTrue(medicamento2.getId() >= 0);
+        Assertions.assertTrue(medicamento2.getId() > 0);
 
     }
 }

@@ -1,0 +1,1 @@
+create table if not exists patient (id int auto_increment primary key, name varchar(255), lastName varchar(255), adress varchar(255), idCard varchar(255), registerDate varchar(255), userName varchar(255), password varchar(255));
