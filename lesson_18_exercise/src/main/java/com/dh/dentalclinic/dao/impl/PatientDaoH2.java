@@ -5,10 +5,7 @@ import com.dh.dentalclinic.dao.IDao;
 import com.dh.dentalclinic.model.Patient;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class PatientDaoH2 implements IDao<Patient> {
 
@@ -47,8 +44,38 @@ public class PatientDaoH2 implements IDao<Patient> {
 
     @Override
     public Patient update(Patient patient) throws SQLException {
+        configJDBC = new ConfigJDBC("org.h2.Driver","jdbc:h2:~/dentalclinic","sa","");
+        Connection conection1  = configJDBC.getConnection();
+
+        String UPDATE = "UPDATE Patient SET name = ?, lastName = ?, adress = ?, idCard = ?, registerDate = ?, userName = ?, password = ? where ID=? ";
+
+        try {
+
+            conection1.setAutoCommit(false);
+
+            PreparedStatement psUpdate =  conection1.prepareStatement(UPDATE);
+            psUpdate.setString(1,patient.getName());
+            psUpdate.setString(2,patient.getLastName());
+            psUpdate.setString(3,patient.getAdress());
+            psUpdate.setString(4,patient.getIdCard());
+            psUpdate.setString(5,patient.getRegisterDate());
+            psUpdate.setString(6,patient.getUserName());
+            psUpdate.setString(7,patient.getPassword());
+            psUpdate.setInt(8,patient.getId());
+
+            conection1.commit();
+            psUpdate.execute();
+
+            conection1.setAutoCommit(true);
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }finally {
+            conection1.close();
+        }
+
+        return patient;
 
     }
-
-
 }

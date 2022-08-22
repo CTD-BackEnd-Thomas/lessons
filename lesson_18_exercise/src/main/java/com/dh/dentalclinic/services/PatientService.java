@@ -18,6 +18,10 @@ public class PatientService {
         return patientDaoH2.save(patient);
     }
 
+    public Patient update(Patient patient) throws SQLException {
+        return patientDaoH2.update(patient);
+    }
+
 
 
 }

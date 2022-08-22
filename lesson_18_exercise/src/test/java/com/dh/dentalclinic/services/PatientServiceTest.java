@@ -28,4 +28,14 @@ class PatientServiceTest {
         Assertions.assertTrue(patient.getId() > 0);
     }
 
+    @Test
+    void updatePatient() throws SQLException{
+        Patient patient = new Patient("Marcio","Santos","Rua Mônaco nº 22","1424577","11/11/2014","mcsantos","1111");
+        patientService.save(patient);
+
+        patient.setPassword("9999");
+        patientService.update(patient);
+        Assertions.assertEquals("9999", patient.getPassword());
+    }
+
 }
